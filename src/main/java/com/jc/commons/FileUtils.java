@@ -21,6 +21,19 @@ public class FileUtils {
 	public static String lineSeparator = System.getProperty("line.separator");
 	public static String lineSeparatorDefault = "\n";
 
+	
+	
+	/**
+	 * 读取File对象的内容
+	 * @param log
+	 * @return
+	 * @throws IOException
+	 */
+	public static String read(File log) throws IOException {
+		return read(log.getAbsolutePath());
+	}
+	
+	
 	/**
 	 * BufferReader读取文件内容，返回字符串的文件内容，换行符是"\n"。
 	 * 
@@ -159,12 +172,52 @@ public class FileUtils {
 
 	public static void main(String[] args) throws IOException {
 		// System.getProperty(Charset.defaultCharset());
-		System.out.println(charsetDetector("E:/dubbo.properties"));
-		String content = read("E:/dubbo.properties");
-		System.out.println(content);
+//		System.out.println(charsetDetector("E:/dubbo.properties"));
+//		String content = read("E:/dubbo.properties");
+//		System.out.println(content);
 		// System.out.println(new String(content.getBytes(),
 		// Charset.defaultCharset()));
 		// write(content, "E:/test.txt");
-
+		File e = new File("E:/");
+		File[] files = e.listFiles();
+		for(File file:files){
+			System.out.println(file.getName());
+		}
+		System.out.println("=====================");
+		sortByName(files);
+		for(File file:files){
+			System.out.println(file.getName());
+		}
 	}
+
+	public static void sortByName(File[] files) {
+		quicksortByName(files, 0, files.length-1);
+	}
+	
+	
+	public static void quicksortByName(File  n[], int left, int right) {
+        int dp;
+        if (left < right) {
+            dp = partition(n, left, right);
+            quicksortByName(n, left, dp - 1);
+            quicksortByName(n, dp + 1, right);
+        }
+    }
+ 
+	private static int partition(File n[], int left, int right) {
+    	File pivot = n[left];
+        while (left < right) {
+            while (left < right && n[right].getName().compareTo(pivot.getName()) >=0)
+                right--;
+            if (left < right)
+                n[left++] = n[right];
+            while (left < right && n[left].getName().compareTo(pivot.getName())  <= 0)
+                left++;
+            if (left < right)
+                n[right--] = n[left];
+        }
+        n[left] = pivot;
+        return left;
+    }
+
 }
