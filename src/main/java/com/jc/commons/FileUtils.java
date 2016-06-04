@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.Set;
 
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
@@ -178,18 +180,20 @@ public class FileUtils {
 		// System.out.println(new String(content.getBytes(),
 		// Charset.defaultCharset()));
 		// write(content, "E:/test.txt");
-		File e = new File("E:/");
-		File[] files = e.listFiles();
-		for(File file:files){
-			System.out.println(file.getName());
-		}
-		System.out.println("=====================");
-		sortByName(files);
-		for(File file:files){
-			System.out.println(file.getName());
-		}
+		/**测试文件名排序*/
+//		File e = new File("E:/");
+//		File[] files = e.listFiles();
+//		for(File file:files){
+//			System.out.println(file.getName());
+//		}
+//		System.out.println("=====================");
+//		sortByName(files);
+//		for(File file:files){
+//			System.out.println(file.getName());
+//		}
 	}
 
+	
 	public static void sortByName(File[] files) {
 		quicksortByName(files, 0, files.length-1);
 	}
@@ -203,7 +207,14 @@ public class FileUtils {
             quicksortByName(n, dp + 1, right);
         }
     }
- 
+	
+	/**
+	 * 按名字快速排序
+	 * @param n
+	 * @param left
+	 * @param right
+	 * @return
+	 */
 	private static int partition(File n[], int left, int right) {
     	File pivot = n[left];
         while (left < right) {
@@ -220,4 +231,11 @@ public class FileUtils {
         return left;
     }
 
+	/**
+	 * 获取Java支持的字符集
+	 * @return
+	 */
+	public static Set<String> availableCharsets(){
+		return Charset.availableCharsets().keySet();
+	}
 }
