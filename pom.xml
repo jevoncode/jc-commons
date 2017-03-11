@@ -13,7 +13,39 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
+	<!-- 发布到nexus命令：mvn deploy -Dmaven.test.skip   -->
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 
+			<id>public</id>
+			<name>Public Repositories</name>
+			<url>http://nexus.jevoncode.com/repository/maven-public/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>public</id>
+			<name>Public Repositories</name>
+			<url>http://nexus.jevoncode.com/repository/maven-public/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>Local Nexus Repository</name>
+			<url>http://nexus.jevoncode.com/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>Snapshots</id>
+			<name>Local Nexus Repository</name>
+			<url>http://nexus.jevoncode.com/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 	<dependencies>
 		<!-- http://mvnrepository.com/artifact/com.ibm.icu/icu4j -->
 		<dependency>
