@@ -12,9 +12,14 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- json -->
+		<jackson.version>2.8.1</jackson.version>
+
+		<!-- Logging -->
+		<slf4j.version>1.7.21</slf4j.version>
 	</properties>
-	
-	<!-- 发布到nexus命令：mvn deploy -Dmaven.test.skip   -->
+
+	<!-- 发布到nexus命令：mvn deploy -Dmaven.test.skip -->
 	<repositories>
 		<repository>
 			<snapshots>
@@ -47,7 +52,20 @@
 		</snapshotRepository>
 	</distributionManagement>
 	<dependencies>
-		<!-- http://mvnrepository.com/artifact/com.ibm.icu/icu4j -->
+		<!-- http://mvnrepository.com/artifact/com.ibm.icu/icu4j -->	<!-- Log依赖 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<!-- json -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.ibm.icu</groupId>
 			<artifactId>icu4j</artifactId>
